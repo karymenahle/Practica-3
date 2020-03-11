@@ -1,0 +1,54 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity cpld is
+Port ( dysplay : out STD_LOGIC_VECTOR (1 downto 0); --selector de los dysplay
+clok, reset, pare : in STD_LOGIC; --Reloj, resetea y parar conteo
+salida_a_display : out STD_LOGIC_VECTOR (6 downto 0)); --Salida a los displays
+end cpld;
+
+architecture Behavioral of cpld is
+
+signal S: STD_LOGIC; -- señal para controlar parar la cuenta
+signal clk: STD_LOGIC; --señal frecuencia despues del divisor
+signal cont: STD_LOGIC_VECTOR(7 downto 0);--se utilza para controlar el divisor de frecuencia
+signal unidades: STD_LOGIC_VECTOR(3 downto 0);--manejo de las unidades
+signal decenas: STD_LOGIC_VECTOR(3 downto 0);--manejo de las decenas
+
+begin
+process(pare)--proceso que controla el evento de pare
+begin
+if pare'event and pare='1' then
+S <= not S; end if; end process; process(clok)-- divisor de frecuencia begin if clok'event and clok = '0' and S = '0' then if cont < reset =" '1'" clk =" '0'">
+case unidades is
+When "0000" =>
+salida_a_display <= "0000001"; --0 When "0001" =>
+salida_a_display <= "1001111"; --1 When "0010" =>
+salida_a_display <= "0010010"; --2 When "0011" =>
+salida_a_display <= "0000110"; --3 When "0100" =>
+salida_a_display <= "1001100"; --4 When "0101" =>
+salida_a_display <= "0100100"; --5 When "0110" =>
+salida_a_display <= "0100000"; --6 When "0111" =>
+salida_a_display <= "0001111"; --7 When "1000" =>
+salida_a_display <= "0000000"; --8 When "1001" =>
+salida_a_display <= "0001100"; --9 When others =>
+salida_a_display <= "1111110"; end case; dysplay <= "01";--activamos el primer display when '1' =>
+case decenas is
+When "0000" =>
+salida_a_display <= "0000001"; --0 When "0001" =>
+salida_a_display <= "1001111"; --1 When "0010" =>
+salida_a_display <= "0010010"; --2 When "0011" =>
+salida_a_display <= "0000110"; --3 When "0100" =>
+salida_a_display <= "1001100"; --4 When "0101" =>
+salida_a_display <= "0100100"; --5 When "0110" =>
+salida_a_display <= "0100000"; --6 When "0111" =>
+salida_a_display <= "0001111"; --7 When "1000" =>
+salida_a_display <= "0000000"; --8 When "1001" =>
+salida_a_display <= "0001100"; --9 When others =>
+salida_a_display <= "1111110"; end case; dysplay <= "10";--activamos el segundo dysplay When others =>
+salida_a_display <= "1111111"; 
+end case; 
+end process; 
+end Behavioral;
